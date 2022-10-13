@@ -4,6 +4,7 @@ import edu.miu.cs590.dto.*;
 import edu.miu.cs590.entity.CreditCard;
 import edu.miu.cs590.entity.PaymentMethod;
 import edu.miu.cs590.entity.PaypalAccount;
+import edu.miu.cs590.exceptions.PaymentMethodNotFoundException;
 import edu.miu.cs590.mapper.*;
 import edu.miu.cs590.repository.PaymentMethodRepo;
 import edu.miu.cs590.util.AppUtil;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -53,6 +55,21 @@ public class PaymentMethodService {
         paypalAccount.setUsername(AppUtil.getCurrentUser());
         paypalAccount = paymentMethodRepo.save(paypalAccount);
         return Mappers.getMapper(PaymentMethodDtoMapper.class).map(paypalAccount);
+    }
+
+    public void setDefaultPaymentMethod(long id) {
+        String username = AppUtil.getCurrentUser();
+        Optional<PaymentMethod> optional = paymentMethodRepo.findByIdAndUsername(id, username);
+
+        if(optional.isEmpty()) {
+            throw new PaymentMethodNotFoundException("No such payment method found");
+        }
+
+        PaymentMethod paymentMethod = optional.get();
+
+        paymentMethodRepo.findAllByUsernameAndIsDefaultIsTrue(username)
+                .forEach(method -> method.setDefault(false));
+        paymentMethod.setDefault(true);
     }
 
     public void delete(long id) {

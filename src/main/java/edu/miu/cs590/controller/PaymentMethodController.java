@@ -6,9 +6,7 @@ import edu.miu.cs590.dto.PaymentMethodDto;
 import edu.miu.cs590.dto.PaypalRequest;
 import edu.miu.cs590.service.PaymentMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +22,11 @@ public class PaymentMethodController {
     public List<PaymentMethodDto> getAll(@CurrentSecurityContext(expression="authentication?.name")
                                              String username) {
         return paymentMethodService.getAllByUsername(username);
+    }
+
+    @GetMapping("/set_default/{id}")
+    public void setDefaultPaymentMethod(@PathVariable long id) {
+        paymentMethodService.setDefaultPaymentMethod(id);
     }
 
     @PostMapping("/add_credit_card")

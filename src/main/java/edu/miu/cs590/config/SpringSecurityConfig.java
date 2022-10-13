@@ -14,6 +14,7 @@ public class SpringSecurityConfig {
 
     private JwtTokenFilter jwtTokenFilter;
 
+
     public SpringSecurityConfig(JwtTokenFilter jwtTokenFilter) {
         this.jwtTokenFilter = jwtTokenFilter;
     }

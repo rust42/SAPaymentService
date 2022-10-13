@@ -2,9 +2,12 @@ package edu.miu.cs590.config;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.miu.cs590.client.AuthClient;
+import edu.miu.cs590.dto.ErrorResponse;
 import edu.miu.cs590.dto.VerifyUserTokenDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,6 +22,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -51,17 +55,20 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
             if (authClient.verifyUser(VerifyUserTokenDto.builder().email(jwt.getSubject()).build())) {
                 setAuthenticationContext(jwt, request);
-                filterChain.doFilter(request, response);
             } else {
                 throw new JWTVerificationException("Token doesnot match");
             }
 
 
         } catch (JWTVerificationException ex) {
-            System.out.println(ex.getMessage());
-            throw new IllegalStateException(String.format("Token %s cannot be trusted", token));
-
+            ErrorResponse output = new ErrorResponse(HttpStatus.UNAUTHORIZED,  ex.getMessage(), request.getRemoteAddr());
+            ObjectMapper objectMapper = new ObjectMapper();
+            PrintWriter writer = response.getWriter();
+            writer.print(objectMapper.writeValueAsString(output));
+            writer.flush();
+            return;
         }
+        filterChain.doFilter(request, response);
 
     }
 
