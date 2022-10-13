@@ -1,0 +1,22 @@
+feign:
+  auth:
+    service:
+      name: auth-service
+      url: localhost:8089/api
+app:
+  jwt:
+    secret: mysecret
+    issuer: sa
+spring:
+  datasource:
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:s3cr3t}
+    url: jdbc:mysql://${DB_HOST:localhost:3306}/${DATABASE_NAME:PaymentDB}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: create
+logging:
+  level:
+    root: info
