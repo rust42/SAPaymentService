@@ -1,8 +1,5 @@
 package edu.miu.cs590.config;
 
-//package edu.miu.cs590.addressservice.config;
-
-
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import edu.miu.cs590.client.AuthClient;

@@ -26,8 +26,8 @@ public class SpringSecurityConfig {
                 .addFilterAfter(jwtTokenFilter, BasicAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/**").permitAll()
-//                .antMatchers("/**").authenticated()
+//                .antMatchers("/**").permitAll()
+                .antMatchers("/**").authenticated()
                 .anyRequest()
                 .authenticated().and().build();
     }

@@ -2,7 +2,7 @@ feign:
   auth:
     service:
       name: auth-service
-      url: localhost:8089/api
+      url: localhost:3003/api
 app:
   jwt:
     secret: mysecret
@@ -16,7 +16,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
 logging:
   level:
     root: info

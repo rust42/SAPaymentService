@@ -6,6 +6,9 @@ import edu.miu.cs590.dto.PaymentMethodDto;
 import edu.miu.cs590.dto.PaypalRequest;
 import edu.miu.cs590.service.PaymentMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +21,9 @@ public class PaymentMethodController {
     private PaymentMethodService paymentMethodService;
 
     @GetMapping
-    public List<PaymentMethodDto> getAll() {
-        return paymentMethodService.getAll();
+    public List<PaymentMethodDto> getAll(@CurrentSecurityContext(expression="authentication?.name")
+                                             String username) {
+        return paymentMethodService.getAllByUsername(username);
     }
 
     @PostMapping("/add_credit_card")
@@ -36,5 +40,4 @@ public class PaymentMethodController {
     public void deleteMethod(@PathVariable long id) {
         paymentMethodService.delete(id);
     }
-
 }
