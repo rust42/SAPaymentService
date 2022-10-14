@@ -1,7 +1,6 @@
 package edu.miu.cs590.entity;
 
 import edu.miu.cs590.dto.PaymentMethodDto;
-import edu.miu.cs590.mapper.EntityMapper;
 import edu.miu.cs590.mapper.MappableEntity;
 import edu.miu.cs590.mapper.PaymentMethodDtoMapper;
 import lombok.Getter;
