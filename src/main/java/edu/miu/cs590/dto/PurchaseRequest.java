@@ -2,9 +2,16 @@ package edu.miu.cs590.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.*;
+
 @Data
 public class PurchaseRequest {
-    private String orderId;
-    private String amount;
-    private String paymentMethodId;
+    @NotBlank
+    private long orderId;
+
+    @NotNull
+    private double amount;
+
+    @NotBlank
+    private long paymentMethodId;
 }

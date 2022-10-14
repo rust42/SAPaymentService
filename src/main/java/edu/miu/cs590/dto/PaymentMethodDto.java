@@ -1,4 +1,5 @@
 package edu.miu.cs590.dto;
+import edu.miu.cs590.entity.PaymentType;
 import lombok.Data;
 
 @Data
