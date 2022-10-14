@@ -10,7 +10,7 @@ import java.util.Optional;
 @Builder
 public class PurchaseResponse {
     private PurchaseStatus purchaseStatus;
-    private long orderId;
+    private String orderId;
     private double paymentAmount;
     // set if status is failure
     private Optional<String> failureReason;

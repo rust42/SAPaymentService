@@ -6,8 +6,8 @@ import javax.validation.constraints.*;
 
 @Data
 public class PurchaseRequest {
-    @NotNull(message = "orderId cannot be null")
-    private long orderId;
+    @NotBlank(message = "orderId cannot be null")
+    private String orderId;
 
     @NotNull(message = "amount cannot be null")
     private double amount;
