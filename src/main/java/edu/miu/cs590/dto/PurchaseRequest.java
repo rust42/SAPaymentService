@@ -6,12 +6,12 @@ import javax.validation.constraints.*;
 
 @Data
 public class PurchaseRequest {
-    @NotBlank
+    @NotNull(message = "orderId cannot be null")
     private long orderId;
 
-    @NotNull
+    @NotNull(message = "amount cannot be null")
     private double amount;
 
-    @NotBlank
+    @NotBlank(message = "paymentMethodId cannot be null")
     private long paymentMethodId;
 }

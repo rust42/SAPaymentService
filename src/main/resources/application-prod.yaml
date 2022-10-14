@@ -11,7 +11,7 @@ spring:
   datasource:
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:s3cr3t}
-    url: jdbc:mysql://${DB_HOST:localhost:3306}/${DATABASE_NAME:PaymentDB}
+    url: jdbc:mysql://${DB_HOST:localhost:3306}/${DATABASE_NAME:PaymentDB}?createDatabaseIfNotExist=true
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
