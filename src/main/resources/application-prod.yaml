@@ -1,13 +1,12 @@
-
 feign:
   auth:
     service:
       name: auth-service
-      url: localhost:8089/api
+      url: ${AUTH_SERVICE_ENDPOINT:localhost:3003/api}
 app:
   jwt:
-    secret: mysecret
-    issuer: sa
+    secret: ${JWT_SECRET:mysecret}
+    issuer: ${JWT_ISSUER:sa}
 spring:
   datasource:
     username: ${DB_USERNAME:root}
@@ -16,5 +15,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-
-
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+logging:
+  level:
+    root: info

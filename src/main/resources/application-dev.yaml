@@ -2,11 +2,11 @@ feign:
   auth:
     service:
       name: auth-service
-      url: localhost:3003/api
+      url: ${AUTH_SERVICE_ENDPOINT:localhost:3003/api}
 app:
   jwt:
-    secret: mysecret
-    issuer: sa
+    secret: ${JWT_SECRET:mysecret}
+    issuer: ${JWT_ISSUER:sa}
 spring:
   datasource:
     username: ${DB_USERNAME:root}
