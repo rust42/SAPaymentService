@@ -7,6 +7,11 @@ app:
   jwt:
     secret: ${JWT_SECRET:mysecret}
     issuer: ${JWT_ISSUER:sa}
+tx:
+  service:
+    name: tx-service
+    url: ${TRANSACTION_SERVICE_ENDPOINT:localhost:8087/api}
+
 spring:
   datasource:
     username: ${DB_USERNAME:root}
