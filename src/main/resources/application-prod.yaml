@@ -6,7 +6,7 @@ feign:
 app:
   jwt:
     secret: ${JWT_SECRET:mysecret}
-    issuer: ${JWT_ISSUER:sa}
+    issuer: ${JWT_ISSUER:ssa}
 tx:
   service:
     name: tx-service

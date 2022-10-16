@@ -5,8 +5,8 @@ feign:
       url: ${AUTH_SERVICE_ENDPOINT:localhost:3003/api}
 app:
   jwt:
-    secret: ${JWT_SECRET:mysecret}
-    issuer: ${JWT_ISSUER:sa}
+    secret: ${JWT_SECRET:mysecrset}
+    issuer: ${JWT_ISSUER:ssa}
 
 tx:
   service:
